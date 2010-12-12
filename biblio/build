@@ -1,0 +1,7 @@
+#!/bin/sh
+
+__build()
+{ pdflatex "document.tex"; }
+
+__build && __build
+
