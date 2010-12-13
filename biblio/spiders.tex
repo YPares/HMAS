@@ -26,8 +26,11 @@ Chacune de ces actions est un processus stochastique. Elle sont gouvernées par 
   \item[niveau de gris et tolérance :] propension de l'araignée à accrocher son fil selon le niveau de gris du pixel,
   \item[probabilité de retour :] propension de l'araignée à repartir en arrière si elle n'a pas accroché son fil. Plus ce paramètre est bas, plus les araignées auront tendance à se disperser.
 \end{itemize}
+Les derniers paramètres à prendre en compte sont le nombre d'agents utilisés ainsi que leur position initiale.
 
 Comme dans tout algorithme heuristique, la difficulté est ici de régler ces paramètres pour chaque agent, afin qu'au final le système assure deux propriétés : la couverture et l'homogénéité.
 
 L'avantage de cette méthode est qu'une région n'est pas nécessairement compacte, les pixels qui la composent étant sélectionnés un par un. On inclut un pixel à partir du moment où le nombre de fils qui y sont accrochés dépasse un certain seuil.
+
+Bien que cette méthode n'utilise pas de \smahLong{}, on peut la voir comme une base et l'adapter à notre sujet en considérant que les araignées sont les spécialistes (les \og{} feuilles \fg{} de la hiérarchie) et qu'elle sont supervisées par d'autres agents analysant la forme des toiles ainsi tissées.
 
