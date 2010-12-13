@@ -11,12 +11,12 @@ Dans le cas de la détection de régions, les poteaux sont les pixels, et les ha
 
 A chaque itération, une araignée peut réaliser trois actions :
 \begin{description}
-  \item[bouger :] soit vers une case adjacente, soit en suivant un fil déjà tissé,
+  \item[bouger :] soit vers un pixel adjacent, soit en suivant un fil déjà tissé,
   \item[fixer :] après avoir bougé, l'araignée peut selon certaines conditions accrocher son fil sur son nouveau pixel,
   \item[repartir :] sinon, l'araignée peut repartir au dernier pixel où elle a accroché son fil.
 \end{description}
 
-Chacune de ces actions est un processus stochastique. Elle sont gouvernées par quatre paramètres :
+Chacune de ces actions est un processus stochastique. Elles sont gouvernées par quatre paramètres :
 \begin{description}
   \item[attraction vers la soie :] propension de l'araignée à suivre un fil déjà tissé plutôt qu'à explorer,
   \item[rayon :] champ de vision en pixels d'une araignée,
