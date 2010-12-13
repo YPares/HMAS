@@ -1,11 +1,33 @@
 \section{Détection de régions à base d'agents-araignées}
 
-% Permet de détecter des ``régions à trous''
+L'article \cite{spiders} est issu des travaux de Vincent Thomas du Laboratoire Lorrain de Recherche en Informatique et ses Applications (LORIA) de l'Université Nancy 2.
 
-L'article \cite{spiders2} est issu des travaux de Vincent Thomas du Laboratoire Lorrain de Recherche en Informatique et ses Applications (LORIA) de l'université Nancy 2.
-Il est très rapidement présenté sur sa page \cite{spiders1}.
+L'article présente une méthode d'extraction de régions d'images par un ensemble d'araignées obéissant au principe biologique de \emph{stigmergie} : le travail de tout agent est guidé par les traces laissées précédemment dans son environnement par lui-même ou par d'autres agents. C'est le cas des phéromones pour les colonies de fourmis ou bien, dans notre cas, les fils de soie pour les araignées. Il n'y a donc pas de communication directe entre les agents.
 
-L'article présente une méthode d'extraction de régions d'images par un ensemble d'araignées obéissant au principe de \emph{stigmergie} : le travail de tout agent est guidé par les traces laissées précédemment dans son environnement par lui-même ou par d'autres agents. C'est le cas des phéromones pour les colonies de fourmis ou bien, dans notre cas, les fils de soie pour les araignées sociales.
+Ce type de système obéit à un \og{}mécanisme d'essaim \fg{} (``swarm mechanism''). Tous les agents présents sont des agents réactifs : leurs actions sont déterminées par de simples stimulus. C'est de l'ensemble de ces comportements simples que va émerger un comportement global auto-organisé.
+ 
+Ici, le système s'inspire du mode de fonctionnement de certaines araignées dites sociales. L'environnement est décrit par une grille de poteaux (``stakes'') de hauteurs variables (par analogie avec une végétation) aux sommets desquels les araignées se déplacent et peuvent accrocher un fil de soie. La toile tissée par une araignée représente donc son parcours sur cette grille.
+Dans le cas de la détection de régions, les poteaux sont les pixels, et les hauteurs correspondent aux niveaux de gris.
 
-Tous les agents présents sont des agents réactifs : leurs actions sont déterminées par de simples stimulus. 
+A chaque itération, une araignée peut réaliser trois actions :
+\begin{description}
+  \item[bouger :] soit vers une case adjacente, soit en suivant un fil déjà tissé,
+  \item[fixer :] après avoir bougé, l'araignée peut selon certaines conditions accrocher son fil sur son nouveau pixel,
+  \item[repartir :] sinon, l'araignée peut repartir au dernier pixel où elle a accroché son fil.
+\end{description}
+
+Chacune de ces actions est un processus stochastique. Elle sont gouvernées par quatre paramètres :
+\begin{description}
+  \item[attraction vers la soie :] propension de l'araignée à suivre un fil déjà tissé plutôt qu'à explorer,
+  \item[rayon :] champ de vision en pixels d'une araignée,
+  \item[niveau de gris et tolérance :] propension de l'araignée à accrocher son fil selon le niveau de gris du pixel,
+  \item[probabilité de retour :] propension de l'araignée à repartir en arrière si elle n'a pas accroché son fil. Plus ce paramètre est bas, plus les araignées auront tendance à se disperser.
+\end{description}
+Les derniers paramètres à prendre en compte sont le nombre d'agents utilisés ainsi que leur position initiale.
+
+Comme dans tout algorithme heuristique, la difficulté est ici de régler ces paramètres pour chaque agent, afin qu'au final le système assure deux propriétés : la couverture et l'homogénéité.
+
+L'avantage de cette méthode est qu'une région n'est pas nécessairement compacte, les pixels qui la composent étant sélectionnés un par un. On inclut un pixel à partir du moment où le nombre de fils qui y sont accrochés dépasse un certain seuil.
+
+Bien que cette méthode n'utilise pas de \smahLong{}, on peut la voir comme une base et l'adapter à notre sujet en considérant que les araignées sont les spécialistes (les \og{}feuilles \fg{} de la hiérarchie) et qu'elle sont supervisées par d'autres agents analysant la forme des toiles ainsi tissées.
 
