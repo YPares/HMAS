@@ -13,10 +13,14 @@ Selon la vision des auteurs, un agent est une \og{}coquille vide\fg{} dans laque
 
 MAGIQUE est un framework Java de développement d'applications multi-agents, utilisant une approche que l'on peut qualifier d'\og{}orientée agent\fg{}. Dans MAGIQUE, l'organisation des agents est (à la base) hiérarchique, c'est-à-dire que chaque agent est récursivement constitué d'agents plus petits. Une hiérarchie peut être vue comme un arbre dont la racine est un agent et dont les hypothétiques fils sont des hiérarchies. Les feuilles sont des agents \emph{spécialistes} et les autres des \emph{superviseurs} ; c'est dire que les superviseurs peuvent être répartis sur un nombre quelconque de niveaux hiérarchiques.
 
-Les agents \emph{spécialistes} sont répartis en groupes où les actions de chaque agent du groupe sont coordonnées par un agent \emph{superviseur} du groupe. 
+Les agents \emph{spécialistes} sont répartis en groupes où les actions de chaque agent du groupe sont coordonnées par un agent \emph{superviseur} du groupe. Les \emph{superviseurs} sont eux mêmes groupés et supervisés par d'autres superviseurs (ce qu découle directement de la structure en arbre).
 
 La hiérarchie représente les canaux de communications entre agents par défaut (communication verticale). Il est aussi possible de basculer d'un modèle hiérarchique strict à un modèle dit \og{}hybride\fg{} en introduisant des liens d'\og{}accointance\fg{} entre agents (communication horizontale), indépendants de la hiérarchie, dans le but de créer dynamiquement (c-à-d. après un certain d'exécution du SMA) un lien entre deux agents effectuant des requêtes fréquentes de l'un vers l'autre. Cela permet d'obtenir un comportement auto-adptatif du SMA et de diminuer les communications.
 
+Lorsqu'un agent se trouve dans une situation où il doit utiliser une compétence dont il ne dispose pas, la première solution consiste à demander à sa hiérarchie de trouver un agent en disposant pour celui-là. La deuxième soution est de faire appel aux accointances pour utiliser une compétence dont l'agent qui la requiert ne dispose pas, mais son accointance si. L'avantage principal découlant de cette vision des choses permet de s'abstraire de l'agent qui utilisera réellement la compétence.
+
 Dans MAGIQUE, l'architecture si situe entre le modèle autonome (les agents sont autonomes et il n'y a pas de structure commune dédiée au partage d'information) et le modèle à tableau noir (espace de recherche partagé entre agents où s'inscrivent les connaissances partagées, les hypothèses et les solutions formulées par les agents).
 
+~
 
+L'avantage principal de MAGIQUE, inhérent à son approche hiérarchique, est de permettre de former des groupes d'agents chargés supervisés par un agent qui déterminera un résultat suivant certains critères, ce qui se prête particulièrement à une problématique de reconnaissance de formes. De plus, le fait que les groupes de ne soient pas cloisonnés, c'est-à-dire qu'un agent peut appartenit à plusieurs groupes différents, et donc être supervisé par plusieurs agents l'utilisant pour calculer divers résultats est un avantage certain dans la problématique qui nous occupe.
