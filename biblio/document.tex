@@ -49,13 +49,12 @@ numbersep=5pt}
 \newcommand\msc{MSC}
 \newcommand\mscLong{Modélisation des Systèmes Complexes}
 \newcommand\sma{SMA}
-\newcommand\smaLong{Système Multi-Agents}
-\newcommand\smasLong{Systèmes Multi-Agents}
-\newcommand\smah{\sma{} Hiérarchique}
-\newcommand\smahLong{\smaLong{} Hiérarchique}
+\newcommand\smaLong[1]{Système#1 Multi-Agents}
+\newcommand\smah[1]{\sma{} Hiérarchique#1}
+\newcommand\smahLong[1]{\smaLong{#1} Hiérarchique#1}
 
 
-\title{\mscLong\\Bibliographie : \smah}
+\title{\mscLong{}\\Bibliographie : \smahLong{}}
 \author{Bastien Bonnet, Yves Parès}
 \maketitle{}
 \input{magique.tex}
