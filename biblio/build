@@ -1,7 +1,8 @@
 #!/bin/sh
 
+doc=document
 __build()
-{ pdflatex "document.tex"; }
+{ pdflatex -file-line-error -interaction nonstopmode $doc.tex ; }
 
-__build && __build
+__build > /dev/null && bibtex $doc && __build > /dev/null && __build| grep -E ':[0-9]{1,6}:|at line|l.[0-9]{1,6}'
 
