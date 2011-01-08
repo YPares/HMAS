@@ -1,6 +1,7 @@
 package hmas;
 
 import java.util.Collection;
+import java.util.HashSet;
 
 
 public abstract class Agent
@@ -24,11 +25,29 @@ public abstract class Agent
         return world.image[x][y];
     }
 
-    public abstract Collection<Agent> getSons();
-    public abstract Collection<Agent> getBrothers();
-    public abstract Collection<Agent> isOver();
-    public abstract Collection<Agent> collidesWith();
+    public Collection<Agent> getSons()
+    {
+        return new HashSet<Agent>();
+    }
 
-    public abstract void move(Vector v);
+    public Collection<Agent> getBrothers()
+    {
+
+    }
+
+    public Collection<Agent> isOver()
+    {
+
+    }
+
+    public Collection<Agent> collidesWith()
+    {
+
+    }
+
+    public void move(Vector v)
+    {
+
+    }
 }
 
