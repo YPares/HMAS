@@ -1,0 +1,6 @@
+#!/bin/bash
+
+mkdir -p classes
+
+javac -d classes src/hmas/*.java
+
