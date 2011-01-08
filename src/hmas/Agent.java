@@ -25,27 +25,27 @@ public abstract class Agent
         return world.image[x][y];
     }
 
-    public Collection<Agent> getSons()
+    protected Collection<Agent> getSons()
     {
         return new HashSet<Agent>();
     }
 
-    public Collection<Agent> getBrothers()
+    protected Collection<Agent> getBrothers()
     {
         return new HashSet<Agent>();
     }
 
-    public Collection<Agent> isOver()
+    protected Collection<Agent> isOver()
     {
         return new HashSet<Agent>();
     }
 
-    public Collection<Agent> collidesWith()
+    protected Collection<Agent> collidesWith()
     {
         return new HashSet<Agent>();
     }
 
-    public void move(Vector v)
+    protected void move(Vector v)
     {
         position = position.add(v);
     }
