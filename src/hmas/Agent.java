@@ -32,22 +32,22 @@ public abstract class Agent
 
     public Collection<Agent> getBrothers()
     {
-
+        return new HashSet<Agent>();
     }
 
     public Collection<Agent> isOver()
     {
-
+        return new HashSet<Agent>();
     }
 
     public Collection<Agent> collidesWith()
     {
-
+        return new HashSet<Agent>();
     }
 
     public void move(Vector v)
     {
-
+        position = position.add(v);
     }
 }
 
