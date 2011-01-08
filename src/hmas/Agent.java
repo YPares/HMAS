@@ -10,6 +10,7 @@ public abstract class Agent
     private Vector position;
     private Vector diagonal;
     private Filter<Agent> differentOfMe;
+    private Filter<Agent> collidesWithMe;
 
     public Agent(World world, int level, Vector position, Vector diagonal)
     {
@@ -22,6 +23,11 @@ public abstract class Agent
         differentOfMe = new Filter<Agent>() {
             public boolean passes(Agent ag){
                 return !self.equals(ag);
+            }
+        };
+        collidesWithMe = new Filter<Agent>() {
+            public boolean passes(Agent ag){
+                return true;
             }
         };
     }
@@ -48,12 +54,12 @@ public abstract class Agent
 
     protected Iterable<Agent> isOver()
     {
-        return new HashSet<Agent>();
+        return collidesWithMe.filter(getSons());
     }
 
     protected Iterable<Agent> collidesWith()
     {
-        return new HashSet<Agent>();
+        return collidesWithMe.filter(getBrothers());
     }
 
     protected void move(Vector v)
