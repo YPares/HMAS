@@ -10,9 +10,10 @@ public abstract class Agent
     private Vector position;
     private Vector diagonal;
     
-    public Agent(World world, Vector position, Vector diagonal)
+    public Agent(World world, int level, Vector position, Vector diagonal)
     {
         this.world = world;
+        this.world.addAgent(level, this);
         this.position = position;
         this.diagonal = diagonal;
     }
