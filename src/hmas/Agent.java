@@ -26,7 +26,13 @@ public abstract class Agent
             }
         };
         collidesWithMe = new Filter<Agent>() {
-            public boolean passes(Agent ag){
+            private boolean pointInMe(Vector v)
+            {
+                return v.x() >= self.position.x() && v.y() >= self.position.y();
+                       
+            }
+
+            public boolean passes(Agent son){
                 return true;
             }
         };
@@ -40,26 +46,26 @@ public abstract class Agent
         return world.image[x][y];
     }
 
-    protected Iterable<Agent> getSons()
+    protected Iterable<Agent> mySons()
     {
         if(level <= 0)
             return new HashSet<Agent>();
         return world.agents.get(level - 1);
     }
 
-    protected Iterable<Agent> getBrothers()
+    protected Iterable<Agent> myBrothers()
     {
         return differentOfMe.filter(world.agents.get(level));
     }
 
-    protected Iterable<Agent> isOver()
+    protected Iterable<Agent> underMe()
     {
-        return collidesWithMe.filter(getSons());
+        return collidesWithMe.filter(mySons());
     }
 
-    protected Iterable<Agent> collidesWith()
+    protected Iterable<Agent> collidingWithMe()
     {
-        return collidesWithMe.filter(getBrothers());
+        return collidesWithMe.filter(myBrothers());
     }
 
     protected void move(Vector v)
