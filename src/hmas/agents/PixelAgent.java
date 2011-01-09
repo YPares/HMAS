@@ -12,8 +12,6 @@ public class PixelAgent extends Agent
     }
     public void step()
     {
-        int stepX, stepY;
-
         if (getPixel(getPosition()) && ! collidingWithMe().iterator().hasNext())
         {
             setFixed();
