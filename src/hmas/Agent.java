@@ -17,9 +17,9 @@ public abstract class Agent
 
     private boolean validPosition(Vector p)
     {
-        Vector size = world.imageSize();
+        Vector diag = world.imageDiagonal();
         return p.x() >= 0 && p.y() >= 0 &&
-               p.x() < size.x() && p.y() < size.y();
+               p.x() <= diag.x() && p.y() <= diag.y();
     }
 
     public Agent(World world, int level, Vector position, Vector diagonal)

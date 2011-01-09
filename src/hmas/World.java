@@ -22,9 +22,10 @@ public class World
         this.image = image;
     }
 
-    public Vector imageSize()
+    public Vector imageDiagonal()
     {
-        return new Vector(image.length, image[0].length);
+        return new Vector(image.length - 1,
+                          image[0].length - 1);
     }
 
     void addAgent(int level, Agent ag)
