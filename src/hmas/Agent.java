@@ -13,6 +13,8 @@ public abstract class Agent
     private Filter<Agent> differentOfMe;
     private Filter<Agent> collidesWithMe;
 
+    private boolean isFixed;
+
     public Agent(World world, int level, Vector position, Vector diagonal)
     {
         this.world = world;
@@ -40,10 +42,21 @@ public abstract class Agent
                        pointInMe(ag.position.add(new Vector(0, ag.diagonal.y())));
             }
         };
+
+        isFixed = false;
     }
 
-    public abstract boolean isFixed();
-    public abstract void    step();
+    public boolean isFixed()
+    {
+        return this.isFixed;
+    }
+
+    public void setFixed()
+    {
+        this.isFixed = true;
+    }
+    
+    public abstract void step();
 
     protected boolean getPixel(int x, int y)
     {
