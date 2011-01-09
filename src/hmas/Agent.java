@@ -7,8 +7,9 @@ public abstract class Agent
 {
     private World world;
     private int level;
-    private Vector position;
-    private Vector diagonal;
+    private Vector position;  // Position is the CENTRE of the pixel
+    private Vector diagonal;  // Then, a 1 pixel agent should have a diagonal of (0, 0): it is merely a point, with no size
+                              // The coordinates of diagonal MUST be both POSITIVE
     private Filter<Agent> differentOfMe;
     private Filter<Agent> collidesWithMe;
 
@@ -28,12 +29,15 @@ public abstract class Agent
         collidesWithMe = new Filter<Agent>() {
             private boolean pointInMe(Vector v)
             {
-                return v.x() >= self.position.x() && v.y() >= self.position.y();
-                       
+                return v.x() >= self.position.x() && v.y() >= self.position.y() &&
+                       v.x() <= self.position.x() + self.diagonal.x() &&
+                       v.y() <= self.position.y() + self.diagonal.y();
             }
 
-            public boolean passes(Agent son){
-                return true;
+            public boolean passes(Agent ag){
+                return pointInMe(ag.position) || pointInMe(ag.position.add(ag.diagonal)) ||
+                       pointInMe(ag.position.add(new Vector(ag.diagonal.x(), 0))) ||
+                       pointInMe(ag.position.add(new Vector(0, ag.diagonal.y())));
             }
         };
     }
