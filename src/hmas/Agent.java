@@ -58,34 +58,34 @@ public abstract class Agent
     
     public abstract void step();
 
-    protected boolean getPixel(int x, int y)
+    boolean getPixel(int x, int y)
     {
         return world.image[x][y];
     }
 
-    protected Iterable<Agent> mySons()
+    Iterable<Agent> mySons()
     {
         if(level <= 0)
             return new HashSet<Agent>();
         return world.agents.get(level - 1);
     }
 
-    protected Iterable<Agent> myBrothers()
+    Iterable<Agent> myBrothers()
     {
         return differentOfMe.filter(world.agents.get(level));
     }
 
-    protected Iterable<Agent> underMe()
+    Iterable<Agent> underMe()
     {
         return collidesWithMe.filter(mySons());
     }
 
-    protected Iterable<Agent> collidingWithMe()
+    Iterable<Agent> collidingWithMe()
     {
         return collidesWithMe.filter(myBrothers());
     }
 
-    protected void move(Vector v)
+    void move(Vector v)
     {
         position = position.add(v);
     }
