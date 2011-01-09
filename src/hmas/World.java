@@ -20,6 +20,7 @@ public class World
     public World(boolean[][] image)
     {
         this.image = image;
+        agents = new ArrayList< HashSet<Agent> >();
     }
 
     public void step()

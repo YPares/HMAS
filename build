@@ -2,4 +2,8 @@
 
 mkdir -p classes
 
-javac -Xlint:unchecked -d classes src/hmas/*.java src/hmas/agents/*.java
+javac -Xlint:unchecked -d classes -sourcepath src \
+  src/hmas/*.java \
+  src/hmas/agents/*.java \
+  src/*.java
+
