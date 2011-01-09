@@ -58,9 +58,9 @@ public abstract class Agent
     
     public abstract void step();
 
-    boolean getPixel(int x, int y)
+    boolean getPixel(Vector v)
     {
-        return world.image[x][y];
+        return world.image[v.x()][v.y()];
     }
 
     Iterable<Agent> mySons()
@@ -88,6 +88,16 @@ public abstract class Agent
     void move(Vector v)
     {
         position = position.add(v);
+    }
+
+    Vector getPosition()
+    {
+        return position;
+    }
+
+    Vector getDiagonal()
+    {
+        return diagonal;
     }
 }
 
