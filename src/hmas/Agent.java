@@ -10,8 +10,9 @@ public abstract class Agent
     private Vector position;  // Position is the CENTRE of the pixel
     private Vector diagonal;  // Then, a 1 pixel agent should have a diagonal of (0, 0): it is merely a point, with no size
                               // The coordinates of diagonal MUST be both POSITIVE
-    private Filter<Agent> differentOfMe;
-    private Filter<Agent> collidesWithMe;
+    private Filter<Agent> differentOfMeFilter;
+    private Filter<Agent> collidesWithMeFilter;
+    private Filter<Agent> fixedFilter;
 
     private boolean isFixed;
 
@@ -30,12 +31,12 @@ public abstract class Agent
         this.position = position;
         this.diagonal = diagonal;
         final Agent self = this;
-        differentOfMe = new Filter<Agent>() {
+        differentOfMeFilter = new Filter<Agent>() {
             public boolean passes(Agent ag){
                 return !self.equals(ag);
             }
         };
-        collidesWithMe = new Filter<Agent>() {
+        collidesWithMeFilter = new Filter<Agent>() {
             private boolean pointInMe(Vector v)
             {
                 return v.x() >= self.position.x() && v.y() >= self.position.y() &&
@@ -47,6 +48,12 @@ public abstract class Agent
                 return pointInMe(ag.position) || pointInMe(ag.position.add(ag.diagonal)) ||
                        pointInMe(ag.position.add(new Vector(ag.diagonal.x(), 0))) ||
                        pointInMe(ag.position.add(new Vector(0, ag.diagonal.y())));
+            }
+        };
+        fixedFilter = new Filter<Agent>() {
+            public boolean passes(Agent ag)
+            {
+                return ag.isFixed();
             }
         };
 
@@ -67,6 +74,7 @@ public abstract class Agent
     
     public abstract void step();
 
+
     protected boolean getPixel(Vector v)
     {
         return world.image[v.x()][v.y()];
@@ -81,33 +89,30 @@ public abstract class Agent
 
     protected Iterable<Agent> myBrothers()
     {
-        return differentOfMe.filter(world.agents.get(level));
+        return differentOfMeFilter.filter(world.agents.get(level));
     }
 
     protected Iterable<Agent> underMe()
     {
-        return collidesWithMe.filter(mySons());
+        return collidesWithMeFilter.filter(mySons());
     }
 
-    protected int countUnder()
+    protected Iterable<Agent> fixed(Iterable<Agent> it)
+    {
+        return fixedFilter.filter(it);
+    }
+
+    protected static int count(Iterable<?> it)
     {
         int count = 0;
-        for(Agent ag : underMe())
+        for(Object obj : it)
             count += 1;
         return count;
     }
 
     protected Iterable<Agent> collidingWithMe()
     {
-        return collidesWithMe.filter(myBrothers());
-    }
-
-    protected int countColliding()
-    {
-        int count = 0;
-        for(Agent ag : collidingWithMe())
-            count += 1;
-        return count;
+        return collidesWithMeFilter.filter(myBrothers());
     }
 
     protected void move(Vector v)
