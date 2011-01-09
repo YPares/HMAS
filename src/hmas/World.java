@@ -6,11 +6,16 @@ import java.util.Collections;
 
 
 // The origin (0, 0) is the UPPER left corner
-// The boolean array 'image' is 'column then row'
+// The boolean array 'image' is 'column then row' (x then y)
 public class World
 {
     boolean[][] image;
     ArrayList< HashSet<Agent> > agents;
+
+    public World(String imageFile) throws java.io.IOException
+    {
+        this(ImageOpener.urlToBoolArray(imageFile));
+    }
 
     public World(boolean[][] image)
     {
@@ -34,6 +39,16 @@ public class World
         if(level < agents.size())
             return agents.get(level);
         return Collections.emptySet();
+    }
+
+    public void displayImage()
+    {
+        ImageOpener.displayBoolArray(image);
+    }
+
+    public void displayLevel(int level)
+    {
+        
     }
 }
 
