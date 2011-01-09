@@ -111,10 +111,12 @@ public abstract class Agent
         return diagonal;
     }
 
-    protected static Vector randomVector()
+    protected static Vector randomMove()
     {
         return new Vector(new Random().nextBoolean() ? 1 : -1,
                           new Random().nextBoolean() ? 1 : -1);
     }
+
+    
 }
 

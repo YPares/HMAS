@@ -3,7 +3,7 @@ package hmas;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Collections;
-
+import java.util.Random;
 
 // The origin (0, 0) is the UPPER left corner
 // The boolean array 'image' is 'column then row' (x then y)
@@ -63,6 +63,11 @@ public class World
                     arr[x][y] = lev;
         }
         displayCharArray(arr);
+    }
+
+    public Vector randomPosition()
+    {
+        return new Vector(new Random().nextInt(image.length), new Random().nextInt(image[0].length));
     }
 
     void addAgent(int level, Agent ag)

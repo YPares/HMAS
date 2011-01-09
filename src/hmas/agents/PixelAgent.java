@@ -8,7 +8,7 @@ public class PixelAgent extends Agent
 
     public PixelAgent (World world)
     {
-        super(world, 0, randomVector() , new Vector(0,0));
+        super(world, 0, world.randomPosition() , new Vector(0,0));
     }
     public void step()
     {
@@ -20,7 +20,7 @@ public class PixelAgent extends Agent
         }
         else
         {
-            move(randomVector());
+            move(randomMove());
         }
     }
 }
