@@ -22,22 +22,17 @@ public class World
         this.image = image;
     }
 
+    public void step()
+    {
+        for(HashSet<Agent> set : agents)
+            for(Agent ag : set)
+                ag.step();
+    }
+
     public Vector imageDiagonal()
     {
         return new Vector(image.length - 1,
                           image[0].length - 1);
-    }
-
-    void addAgent(int level, Agent ag)
-    {
-        int maxLevel = agents.size()-1;
-        if(level > maxLevel)
-        {
-            agents.ensureCapacity(level+1);
-            for(int i=maxLevel+1; i<=level; i++)
-                agents.set(i, new HashSet<Agent>());
-        }
-        agents.get(level).add(ag);
     }
 
     public Iterable<Agent> getLevel(int level)
@@ -68,6 +63,18 @@ public class World
                     arr[x][y] = lev;
         }
         displayCharArray(arr);
+    }
+
+    void addAgent(int level, Agent ag)
+    {
+        int maxLevel = agents.size()-1;
+        if(level > maxLevel)
+        {
+            agents.ensureCapacity(level+1);
+            for(int i=maxLevel+1; i<=level; i++)
+                agents.set(i, new HashSet<Agent>());
+        }
+        agents.get(level).add(ag);
     }
 
     private char[][] imageToCharArray()
