@@ -58,7 +58,7 @@ public abstract class Agent
     
     public abstract void step();
 
-    boolean getPixel(Vector v)
+    protected boolean getPixel(Vector v)
     {
         return world.image[v.x()][v.y()];
     }
