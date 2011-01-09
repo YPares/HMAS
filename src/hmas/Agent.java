@@ -1,6 +1,6 @@
 package hmas;
 
-import java.util.HashSet;
+import java.util.Collections;
 
 
 public abstract class Agent
@@ -66,7 +66,7 @@ public abstract class Agent
     Iterable<Agent> mySons()
     {
         if(level <= 0)
-            return new HashSet<Agent>();
+            return Collections.emptySet();
         return world.agents.get(level - 1);
     }
 

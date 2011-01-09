@@ -2,6 +2,7 @@ package hmas;
 
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.Collections;
 
 
 // The origin (0, 0) is the UPPER left corner
@@ -32,7 +33,7 @@ public class World
     {
         if(level < agents.size())
             return agents.get(level);
-        return new HashSet<Agent>();
+        return Collections.emptySet();
     }
 }
 
