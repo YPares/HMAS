@@ -27,7 +27,8 @@ public class World
     {
         for(HashSet<Agent> set : agents.values())
             for(Agent ag : set)
-                ag.step();
+                if(!ag.isFixed())
+                    ag.step();
     }
 
     public Vector imageDiagonal()
@@ -90,7 +91,7 @@ public class World
         for(int x=0; x<image.length; x++)
             for(int y=0; y<image[0].length; y++)
             {
-                arr[x][y] = image[x][y] ? 'X' : ' ';
+                arr[x][y] = image[x][y] ? '.' : ' ';
             }
         return arr;
     }
