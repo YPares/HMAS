@@ -1,7 +1,7 @@
 package hmas;
 
 import java.util.Collections;
-
+import java.util.Random;
 
 public abstract class Agent
 {
@@ -98,6 +98,12 @@ public abstract class Agent
     protected Vector getDiagonal()
     {
         return diagonal;
+    }
+
+    protected static Vector randomVector()
+    {
+        return new Vector(new Random().nextBoolean() ? 1 : -1,
+                          new Random().nextBoolean() ? 1 : -1);
     }
 }
 
