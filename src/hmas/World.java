@@ -54,7 +54,41 @@ public class World
 
     public void displayLevel(int level)
     {
-        
+        char[][] arr = imageToCharArray();
+        char lev = Character.forDigit(level, 10);
+        for(Agent ag : getLevel(level))
+        {
+            Vector p = ag.getPosition();
+            Vector d = ag.getDiagonal();
+            for(int x=p.x(); x<=p.x()+d.x(); x++)
+                for(int y=p.y(); y<=p.y()+d.y(); y++)
+                    if(x >= 0 && y >= 0 &&
+                       x < image.length &&
+                       y < image[0].length)
+                    arr[x][y] = lev;
+        }
+        displayCharArray(arr);
+    }
+
+    private char[][] imageToCharArray()
+    {
+        char[][] arr = new char[image.length][image[0].length];
+        for(int x=0; x<image.length; x++)
+            for(int y=0; y<image[0].length; y++)
+            {
+                arr[x][y] = image[x][y] ? 'X' : ' ';
+            }
+        return arr;
+    }
+
+    private static void displayCharArray(char[][] arr)
+    {
+        for (int y=0; y < arr[0].length; y++) {
+            for (int x=0; x < arr.length; x++) {
+                 System.out.print(arr[x][y]);   
+            }
+            System.out.println("");
+        }
     }
 }
 
