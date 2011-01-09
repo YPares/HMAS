@@ -1,6 +1,6 @@
 package hmas;
 
-import java.util.HashSet;
+import java.util.Collections;
 
 
 public abstract class Agent
@@ -58,15 +58,15 @@ public abstract class Agent
     
     public abstract void step();
 
-    boolean getPixel(int x, int y)
+    boolean getPixel(Vector v)
     {
-        return world.image[x][y];
+        return world.image[v.x()][v.y()];
     }
 
     Iterable<Agent> mySons()
     {
         if(level <= 0)
-            return new HashSet<Agent>();
+            return Collections.emptySet();
         return world.agents.get(level - 1);
     }
 
@@ -88,6 +88,16 @@ public abstract class Agent
     void move(Vector v)
     {
         position = position.add(v);
+    }
+
+    Vector getPosition()
+    {
+        return position;
+    }
+
+    Vector getDiagonal()
+    {
+        return diagonal;
     }
 }
 
