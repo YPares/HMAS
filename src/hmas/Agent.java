@@ -89,9 +89,25 @@ public abstract class Agent
         return collidesWithMe.filter(mySons());
     }
 
+    protected int countUnder()
+    {
+        int count = 0;
+        for(Agent ag : underMe())
+            count += 1;
+        return count;
+    }
+
     protected Iterable<Agent> collidingWithMe()
     {
         return collidesWithMe.filter(myBrothers());
+    }
+
+    protected int countColliding()
+    {
+        int count = 0;
+        for(Agent ag : collidingWithMe())
+            count += 1;
+        return count;
     }
 
     protected void move(Vector v)
