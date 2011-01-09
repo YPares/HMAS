@@ -1,4 +1,4 @@
-import hmas.ImageOpener;
+import hmas.World;
 
 import java.io.IOException;
 
@@ -6,7 +6,7 @@ import java.io.IOException;
 public class TestImage
 {
     public static void main(String[] args) throws IOException {
-       ImageOpener.displayBoolArray(ImageOpener.urlToBoolArray(args[0])); 
+       new World(args[0]).displayImage(); 
     }
 }
 
