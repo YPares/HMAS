@@ -54,9 +54,16 @@ public abstract class Agent
             }
         };
         collidesPartiallyFilter = new CollisionFilter(this) {
-            public boolean passes(Agent ag){
+            public boolean passes(Agent ag) {
                 return pointInMe(ag.position) || pointInMe(ag.position.add(ag.diagonal)) ||
                        pointInMe(ag.position.add(new Vector(ag.diagonal.x(), 0))) ||
+                       pointInMe(ag.position.add(new Vector(0, ag.diagonal.y())));
+            }
+        };
+        collidesCompletelyFilter = new CollisionFilter(this) {
+            public boolean passes(Agent ag) {
+                return pointInMe(ag.position) && pointInMe(ag.position.add(ag.diagonal)) &&
+                       pointInMe(ag.position.add(new Vector(ag.diagonal.x(), 0))) &&
                        pointInMe(ag.position.add(new Vector(0, ag.diagonal.y())));
             }
         };
