@@ -48,10 +48,14 @@ public class World
         ImageOpener.displayBoolArray(image);
     }
 
+    private static char getLevelRepr(int level, boolean fixed)
+    {
+        return (char)(((int)(fixed ? 'A' : 'a')) + level);
+    }
+
     public void displayLevel(int level)
     {
         char[][] arr = imageToCharArray();
-        char lev = Character.forDigit(level, 10);
         for(Agent ag : getLevel(level))
         {
             Vector p = ag.getPosition();
@@ -61,7 +65,7 @@ public class World
                     if(x >= 0 && y >= 0 &&
                        x < image.length &&
                        y < image[0].length)
-                    arr[x][y] = lev;
+                    arr[x][y] = getLevelRepr(level, ag.isFixed());
         }
         displayCharArray(arr);
     }
