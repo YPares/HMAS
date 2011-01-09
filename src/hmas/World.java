@@ -8,15 +8,15 @@ import java.util.HashSet;
 // The boolean array 'image' is 'column then row'
 public class World
 {
-    protected boolean[][] image;
-    protected ArrayList< HashSet<Agent> > agents;
+    boolean[][] image;
+    ArrayList< HashSet<Agent> > agents;
 
     public World(boolean[][] image)
     {
         this.image = image;
     }
 
-    protected void addAgent(int level, Agent ag)
+    void addAgent(int level, Agent ag)
     {
         int maxLevel = agents.size()-1;
         if(level > maxLevel)
@@ -26,6 +26,13 @@ public class World
                 agents.set(i, new HashSet<Agent>());
         }
         agents.get(level).add(ag);
+    }
+
+    public Iterable<Agent> getLevel(int level)
+    {
+        if(level < agents.size())
+            return agents.get(level);
+        return new HashSet<Agent>();
     }
 }
 
