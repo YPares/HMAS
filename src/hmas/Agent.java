@@ -15,11 +15,18 @@ public abstract class Agent
 
     private boolean isFixed;
 
+    private boolean validPosition(Vector p)
+    {
+        Vector size = world.imageSize();
+        return p.x() >= 0 && p.y() >= 0 &&
+               p.x() < size.x() && p.y() < size.y();
+    }
+
     public Agent(World world, int level, Vector position, Vector diagonal)
     {
         this.world = world;
         this.level = level;
-        this.world.addAgent(level, this);
+        assert(validPosition(position));
         this.position = position;
         this.diagonal = diagonal;
         final Agent self = this;
@@ -44,6 +51,8 @@ public abstract class Agent
         };
 
         isFixed = false;
+
+        this.world.addAgent(level, this);
     }
 
     public boolean isFixed()
@@ -87,7 +96,9 @@ public abstract class Agent
 
     protected void move(Vector v)
     {
-        position = position.add(v);
+        Vector newPosition = position.add(v);
+        if(validPosition(newPosition))
+            position = newPosition;
     }
 
     protected Vector getPosition()

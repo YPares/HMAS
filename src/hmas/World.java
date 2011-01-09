@@ -22,6 +22,11 @@ public class World
         this.image = image;
     }
 
+    public Vector imageSize()
+    {
+        return new Vector(image.length, image[0].length);
+    }
+
     void addAgent(int level, Agent ag)
     {
         int maxLevel = agents.size()-1;
