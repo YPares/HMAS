@@ -70,32 +70,32 @@ public abstract class Agent
         return world.agents.get(level - 1);
     }
 
-    Iterable<Agent> myBrothers()
+    protected Iterable<Agent> myBrothers()
     {
         return differentOfMe.filter(world.agents.get(level));
     }
 
-    Iterable<Agent> underMe()
+    protected Iterable<Agent> underMe()
     {
         return collidesWithMe.filter(mySons());
     }
 
-    Iterable<Agent> collidingWithMe()
+    protected Iterable<Agent> collidingWithMe()
     {
         return collidesWithMe.filter(myBrothers());
     }
 
-    void move(Vector v)
+    protected void move(Vector v)
     {
         position = position.add(v);
     }
 
-    Vector getPosition()
+    protected Vector getPosition()
     {
         return position;
     }
 
-    Vector getDiagonal()
+    protected Vector getDiagonal()
     {
         return diagonal;
     }
