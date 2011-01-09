@@ -1,6 +1,6 @@
 package hmas;
 
-import java.util.ArrayList;
+import java.util.TreeMap;
 import java.util.HashSet;
 import java.util.Collections;
 import java.util.Random;
@@ -10,7 +10,7 @@ import java.util.Random;
 public class World
 {
     boolean[][] image;
-    ArrayList< HashSet<Agent> > agents;
+    TreeMap< Integer, HashSet<Agent> > agents;
 
     public World(String imageFile) throws java.io.IOException
     {
@@ -20,12 +20,12 @@ public class World
     public World(boolean[][] image)
     {
         this.image = image;
-        agents = new ArrayList< HashSet<Agent> >();
+        agents = new TreeMap< Integer, HashSet<Agent> >();
     }
 
     public void step()
     {
-        for(HashSet<Agent> set : agents)
+        for(HashSet<Agent> set : agents.values())
             for(Agent ag : set)
                 ag.step();
     }
@@ -38,7 +38,7 @@ public class World
 
     public Iterable<Agent> getLevel(int level)
     {
-        if(level < agents.size())
+        if(agents.containsKey(level))
             return agents.get(level);
         return Collections.emptySet();
     }
@@ -73,12 +73,9 @@ public class World
 
     void addAgent(int level, Agent ag)
     {
-        int maxLevel = agents.size()-1;
-        if(level > maxLevel)
+        if(!agents.containsKey(level))
         {
-            agents.ensureCapacity(level+1);
-            for(int i=maxLevel+1; i<=level; i++)
-                agents.set(i, new HashSet<Agent>());
+            agents.put(level, new HashSet<Agent>());
         }
         agents.get(level).add(ag);
     }
