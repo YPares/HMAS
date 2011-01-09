@@ -11,8 +11,11 @@ public class Main
         for(int i=0; i<1000; i++)
             new PixelAgent(world);
         for(int i=0; i<5000; i++)
+        {
             world.step();
-        world.displayLevel(0);
+            world.displayLevel(0);
+            System.in.read();
+        }
     }
 }
 

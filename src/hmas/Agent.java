@@ -3,15 +3,32 @@ package hmas;
 import java.util.Collections;
 import java.util.Random;
 
+
 public abstract class Agent
 {
+    private abstract class CollisionFilter extends Filter<Agent>
+    {
+        private Agent self;
+
+        CollisionFilter(Agent self)
+        { this.self = self; }
+
+        boolean pointInMe(Vector v)
+        {
+            return v.x() >= self.position.x() && v.y() >= self.position.y() &&
+                   v.x() <= self.position.x() + self.diagonal.x() &&
+                   v.y() <= self.position.y() + self.diagonal.y();
+        }
+    }
+
     private World world;
     private int level;
     private Vector position;  // Position is the CENTRE of the pixel
     private Vector diagonal;  // Then, a 1 pixel agent should have a diagonal of (0, 0): it is merely a point, with no size
                               // The coordinates of diagonal MUST be both POSITIVE
-    private Filter<Agent> differentOfMeFilter;
-    private Filter<Agent> collidesWithMeFilter;
+    private Filter<Agent> differentFilter;
+    private Filter<Agent> collidesPartiallyFilter;
+    private Filter<Agent> collidesCompletelyFilter;
     private Filter<Agent> fixedFilter;
 
     private boolean isFixed;
@@ -31,19 +48,12 @@ public abstract class Agent
         this.position = position;
         this.diagonal = diagonal;
         final Agent self = this;
-        differentOfMeFilter = new Filter<Agent>() {
+        differentFilter = new Filter<Agent>() {
             public boolean passes(Agent ag){
                 return !self.equals(ag);
             }
         };
-        collidesWithMeFilter = new Filter<Agent>() {
-            private boolean pointInMe(Vector v)
-            {
-                return v.x() >= self.position.x() && v.y() >= self.position.y() &&
-                       v.x() <= self.position.x() + self.diagonal.x() &&
-                       v.y() <= self.position.y() + self.diagonal.y();
-            }
-
+        collidesPartiallyFilter = new CollisionFilter(this) {
             public boolean passes(Agent ag){
                 return pointInMe(ag.position) || pointInMe(ag.position.add(ag.diagonal)) ||
                        pointInMe(ag.position.add(new Vector(ag.diagonal.x(), 0))) ||
@@ -89,12 +99,17 @@ public abstract class Agent
 
     protected Iterable<Agent> myBrothers()
     {
-        return differentOfMeFilter.filter(world.agents.get(level));
+        return differentFilter.filter(world.agents.get(level));
     }
 
-    protected Iterable<Agent> underMe()
+    protected Iterable<Agent> partiallyUnderMe()
     {
-        return collidesWithMeFilter.filter(mySons());
+        return collidesPartiallyFilter.filter(mySons());
+    }
+
+    protected Iterable<Agent> completelyUnderMe()
+    {
+        return collidesCompletelyFilter.filter(mySons());
     }
 
     protected Iterable<Agent> fixed(Iterable<Agent> it)
@@ -112,7 +127,7 @@ public abstract class Agent
 
     protected Iterable<Agent> collidingWithMe()
     {
-        return collidesWithMeFilter.filter(myBrothers());
+        return collidesPartiallyFilter.filter(myBrothers());
     }
 
     protected void move(Vector v)
