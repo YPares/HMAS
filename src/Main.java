@@ -2,13 +2,13 @@ import hmas.World;
 import hmas.Agent;
 import hmas.agents.*;
 import hmas.Vector;
-
+import java.util.Scanner;
 public class Main
 {
     public static void main(String[] args) throws java.io.IOException
     {
         World world = new World(args[0]);
-        for(int i=0; i<1000; i++)
+        for(int i=0; i<2000; i++)
             new PixelAgent(world);
         for(int i=0; i<100; i++)
         {
@@ -33,7 +33,7 @@ public class Main
         
         for(int level=0; level <= 1; level++)
         {
-            for(int i=0; i<8000; i++)
+            for(int i=0; i<4000; i++)
             {
                 world.stepLevel(level);
             }
@@ -49,9 +49,19 @@ public class Main
         }
 
         //world.displayLevel(Integer.parseInt(args[1]));
-        int[] levels = {0};
-        world.displayLevels(levels);
-        System.out.println(top.found());
+        //int[] levels = {1};
+        //world.displayLevels(levels);
+        
+        Scanner sc = new Scanner(System.in);
+        int level;
+        int found = top.found();
+        System.out.println("Found: " + (found == 2 ? "2, 5, 6, 8 ou 9" : found) );
+        while((level = sc.nextInt()) != 9){
+            world.displayLevel(level);
+            top.found();
+            System.out.println("Found: " + (found == 2 ? "2, 5, 6, 8 ou 9" : found) );
+         }
+        
     }
 }
 

@@ -10,7 +10,7 @@ public class HorizontalAgent extends Agent
     {
         switch(level)
         {
-            case 1: return new Vector(9, 0);
+            case 1: return new Vector(9, 1);
             case 2: return new Vector(49, 4);
             case 3: return new Vector(99, 66);
         }
@@ -32,7 +32,7 @@ public class HorizontalAgent extends Agent
         int minUnder = 1;
         switch(getLevel())
         {
-            case 1: minUnder = 8;
+            case 1: minUnder = 15;
                     break;
             case 2: minUnder = 3;
                     break;

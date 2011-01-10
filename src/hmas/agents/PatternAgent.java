@@ -28,7 +28,7 @@ public class PatternAgent extends Agent
             found = 0;
             setFixed();
         }
-        if(numV == 1 && numH == 0) {
+        else if(numV == 1 && numH == 0) {
             found = 1;
             setFixed();
         }
@@ -54,8 +54,8 @@ public class PatternAgent extends Agent
 
     public Integer found()
     {
-        System.out.println(numHFinal);
-        System.out.println(numVFinal);
+        System.out.println("H: " + numHFinal);
+        System.out.println("V: " + numVFinal);
         return this.found;
     }
 }
