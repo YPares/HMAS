@@ -30,7 +30,7 @@ public class PatternAgent extends Agent
             found = 0;
             setFixed();
         }
-        if(numV == 1 && numH == 0) {
+        else if(numV == 1 && numH == 0) {
             found = 1;
             setFixed();
         }
@@ -63,13 +63,13 @@ public class PatternAgent extends Agent
     // Gives the number of HorizontalAgents of level N-1 that have been found
     public Integer numHFinal()
     {
-        return self.numHFinal;
+        return numHFinal;
     }
 
     // Gives the number of VerticalAgents of level N-1 that have been found
     public Integer numVFinal()
     {
-        return self.numVFinal;
+        return numVFinal;
     }
 }
 

@@ -12,7 +12,7 @@ public class VerticalAgent extends Agent
     {
         switch(level)
         {
-            case 1: return new Vector(0, 19);
+            case 1: return new Vector(1, 9);
             case 2: return new Vector(6, 99);
             case 3: return new Vector(33, 199);
         }
@@ -34,11 +34,11 @@ public class VerticalAgent extends Agent
         int minUnder = 1;
         switch(getLevel())
         {
-            case 1: minUnder = 8;
+            case 1: minUnder = 15;
                     break;
             case 2: minUnder = 3;
                     break;
-            case 3: minUnder = 2;
+            case 3: minUnder = 1;
                     break;
         }
         // Fixes if it has a certain number of agents of level N-1, and if it does not collide with another fixed vertical agent of level N.
