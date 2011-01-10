@@ -4,11 +4,13 @@ import hmas.*;
 import java.util.Random;
 
 
+// Top agent that recognizes a digit given the fixed vertical and horizontal agents under it
+// Only appears at level 4.
 public class PatternAgent extends Agent
 {
     private Integer found = null;
-    private int numVFinal;
-    private int numHFinal;
+    private Integer numVFinal = 0;
+    private Integer numHFinal = 0;
 
     public PatternAgent(World world)
     {
@@ -52,11 +54,22 @@ public class PatternAgent extends Agent
         numVFinal = numV;
     }
 
+    // Gives the digit that has been found, or null if it is still to be found
     public Integer found()
     {
-        System.out.println(numHFinal);
-        System.out.println(numVFinal);
         return this.found;
+    }
+
+    // Gives the number of HorizontalAgents of level N-1 that have been found
+    public Integer numHFinal()
+    {
+        return self.numHFinal;
+    }
+
+    // Gives the number of VerticalAgents of level N-1 that have been found
+    public Integer numVFinal()
+    {
+        return self.numVFinal;
     }
 }
 

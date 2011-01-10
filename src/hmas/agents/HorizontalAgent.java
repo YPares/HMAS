@@ -4,6 +4,8 @@ import hmas.*;
 import java.util.Random;
 
 
+// Agent which is an horizontal bar
+// Can appear at levels 1, 2 or 3. Its size varies in function of the level.
 public class HorizontalAgent extends Agent
 {
     public static Vector makeDiagonal(int level)
@@ -39,6 +41,7 @@ public class HorizontalAgent extends Agent
             case 3: minUnder = 1;
                     break;
         }
+        // Fixes if it has a certain number of agents of level N-1, and if it does not collide with another fixed horizontal agent of level N.
         if(count(fixed(completelyUnderMe())) >= minUnder && none(fixed(ofMyType(collidingWithMe()))))
             setFixed();
         else
