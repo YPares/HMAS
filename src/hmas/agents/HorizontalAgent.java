@@ -12,7 +12,7 @@ public class HorizontalAgent extends Agent
         {
             case 1: return new Vector(9, 0);
             case 2: return new Vector(49, 4);
-            case 3: return new Vector(99, 4);
+            case 3: return new Vector(99, 9);
         }
         return new Vector(0, 0);
     }
@@ -25,16 +25,23 @@ public class HorizontalAgent extends Agent
     public void step()
     {
         int minUnder = 1;
+        Iterable<Agent> sonsToConsider = null;
         switch(getLevel())
         {
-            case 1: minUnder = 8; break;
-            case 2: minUnder = 4; break;
-            case 3: minUnder = 2; break;
+            case 1: minUnder = 8;
+                    sonsToConsider = completelyUnderMe();
+                    break;
+            case 2: minUnder = 4;
+                    sonsToConsider = completelyUnderMe();
+                    break;
+            case 3: minUnder = 2;
+                    sonsToConsider = partiallyUnderMe();
+                    break;
         }
-        if(count(fixed(completelyUnderMe())) >= minUnder && none(fixed(collidingWithMe())))
+        if(count(fixed(sonsToConsider)) >= minUnder && none(fixed(collidingWithMe())))
             setFixed();
         else
-            move(randomMove());
+            move(randomMove());   
     }
 }
 
