@@ -14,10 +14,10 @@
 \usepackage{caption}
 \usepackage{ulem}
 
-\title{FUCK}
-\author{Bastien \textsc{Bonnet}, Paul \textsc{Gay}, Yves \textsc{Parès}}
+\title{SMA Hiérarchiques\\Application à la reconnaissance de formes}
+\author{Bastien \textsc{Bonnet}, Yves \textsc{Parès}}
 %\date{2001-11-16}
-\usetheme{Warsaw}
+\usetheme{Singapore}
 
 \begin{document}
 
@@ -46,26 +46,102 @@
 %\section[Outline]{}
 \frame{\tableofcontents}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% ACQUISITION
 
+\section{SMA Hiérarchique}
 
+\frame {
+  \frametitle{\insertsection}
 
-\section{L'horadatage certifié}
+  \begin{block}{Principes généraux}
+  \begin{itemize}
+    \item N niveaux d'agents,
+    \item Tout agent $\notin{}niveau_N$ est supervisé,
+    \item Communication entre agents limitée.
+  \end{itemize}
+  \end{block}
+  
+  \pause{}
 
-
-\section{SignServer}
-
-
-
-\section{Démonstration}
-\frame
-{
-        \centering \huge 2. \insertsection  
-               
+  \begin{block}{Notre cas}
+  \begin{itemize}
+    \item Agents répartis en niveaux,
+    \item Communication par observation uniquement,
+    \item Niveau $N$ voit uniquement :
+      \begin{itemize}
+        \item Fils : Niveau $N-1$,
+        \item Frères : Autres du niveau $N$.
+      \end{itemize}
+  \end{itemize}
+  \end{block}
 }
 
 
+\section{Reconnaissance de formes}
+
+\frame{
+  \frametitle{\insertsection}
+  
+  \begin{block}{Formes et images simples}
+  \begin{itemize}
+    \item Chiffres style radio-réveil,
+    \item Tracés à la main,
+    \item Images binaires en 100x200.
+  \end{itemize}
+  \end{block}
+}
+
+\frame{
+  \frametitle{Agents utilisés}
+
+  \begin{block}{Agents}
+  \begin{itemize}
+    \item Taille,
+    \item Position,
+    \item Niveau,
+    \item EstFixé,
+    \item Méthode \textit{step}.
+  \end{itemize}
+  \end{block}
+}
+
+\frame{
+  \frametitle{Mécaniques de reconnaissance}
+
+  \begin{block}{Architecture de base}
+  \begin{itemize}
+    \item Image = tableau de booléens,
+    \item Agent,
+    \item World.
+  \end{itemize}
+  \end{block}
+
+  \pause{}
+
+  \begin{block}{Agents}
+  3 types d'agents sur 5 niveaux :
+  \begin{itemize}
+    \item PixelAgent (niv. 0),
+    \item Vertical et HorizontalAgent (niv. 1 à 3),
+    \item PatternAgent (unique, niv. 4).
+  \end{itemize}
+  \end{block}
+}
+
+\section{Démonstration}
+\frame {
+  \centering \huge \insertsection  
+}
+
+\section{Conclusion}
+\frame {
+  \frametitle{\insertsection}
+
+  \begin{itemize}
+    \item Empirique et aléatoire,
+    \item Très lent,
+    \item Conception permet système paramétrable et évolutif.
+  \end{itemize}
+}
 
 \end{document}
 
