@@ -130,6 +130,11 @@ public abstract class Agent
         return count;
     }
 
+    protected static boolean none(Iterable<?> it)
+    {
+        return !it.iterator().hasNext();
+    }
+
     protected Iterable<Agent> collidingWithMe()
     {
         return collidesPartiallyFilter.filter(myBrothers());

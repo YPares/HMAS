@@ -29,7 +29,7 @@ public class VerticalAgent extends Agent
             case 1: minUnder = 8; break;
             case 2: minUnder = 5; break;
         }
-        if(count(fixed(completelyUnderMe())) >= minUnder)
+        if(count(fixed(completelyUnderMe())) >= minUnder && none(fixed(collidingWithMe())))
             setFixed();
         else
             move(randomMove());   

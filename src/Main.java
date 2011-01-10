@@ -10,17 +10,22 @@ public class Main
         World world = new World(args[0]);
         for(int i=0; i<1000; i++)
             new PixelAgent(world);
-        for(int i=0; i<30; i++)
+        for(int i=0; i<50; i++)
             new VerticalAgent(world, 1);
-        for(int i=0; i<5000; i++)
+        for(int i=0; i<5; i++)
+            new VerticalAgent(world, 2);
+        for(int i=0; i<2000; i++)
         {
             world.stepLevel(0);
         }
-        for(int i=0; i<5000; i++)
+        for(int i=0; i<2000; i++)
         {
+            world.stepLevel(0);
             world.stepLevel(1);
         }
-        world.displayLevel(1);
+        for(int i=0; i<2000; i++)
+            world.stepAll();
+        world.displayLevel(Integer.parseInt(args[1]));
     }
 }
 
