@@ -50,7 +50,7 @@ public class Main
         }
 
         //world.displayLevel(Integer.parseInt(args[1]));
-        int[] levels = {2, 3};
+        int[] levels = {3};
         world.displayLevels(levels);
         System.out.println(top.found());
     }
