@@ -26,10 +26,8 @@ public abstract class Agent
     private Vector position;  // Position is the CENTRE of the pixel
     private Vector diagonal;  // Then, a 1 pixel agent should have a diagonal of (0, 0): it is merely a point, with no size
                               // The coordinates of diagonal MUST be both POSITIVE
-    private Filter<Agent> differentFilter;
-    private Filter<Agent> collidesPartiallyFilter;
-    private Filter<Agent> collidesCompletelyFilter;
-    private Filter<Agent> fixedFilter;
+    private Filter<Agent> differentFilter, collidesPartiallyFilter,
+                          collidesCompletelyFilter, fixedFilter;
 
     private boolean isFixed;
 
@@ -154,12 +152,15 @@ public abstract class Agent
         return diagonal;
     }
 
+    protected int getLevel()
+    {
+        return level;
+    }
+
     protected static Vector randomMove()
     {
         return new Vector(new Random().nextBoolean() ? 1 : -1,
                           new Random().nextBoolean() ? 1 : -1);
     }
-
-    
 }
 
