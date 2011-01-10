@@ -64,6 +64,20 @@ public class World
     public void displayLevel(int level)
     {
         char[][] arr = imageToCharArray();
+        addLevelToDisplay(level, arr);
+        displayCharArray(arr);
+    }
+
+    public void displayLevels(int[] levels)
+    {
+        char[][] arr = imageToCharArray();
+        for(int i=levels.length-1; i>=0; i--)
+            addLevelToDisplay(levels[i], arr);
+        displayCharArray(arr);
+    }
+
+    private void addLevelToDisplay(int level, char[][] arr)
+    {
         for(Agent ag : getLevel(level))
         {
             Vector p = ag.getPosition();
@@ -75,7 +89,6 @@ public class World
                        y < image[0].length)
                     arr[x][y] = getLevelRepr(level, ag.isFixed());
         }
-        displayCharArray(arr);
     }
 
     public Vector randomPosition()

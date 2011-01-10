@@ -25,7 +25,9 @@ public class Main
         }
         for(int i=0; i<2000; i++)
             world.stepAll();
-        world.displayLevel(Integer.parseInt(args[1]));
+        //world.displayLevel(Integer.parseInt(args[1]));
+        //int[] levels = {0,1,2};
+        //world.displayLevels(levels);
     }
 }
 

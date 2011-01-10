@@ -11,7 +11,8 @@ public class VerticalAgent extends Agent
         switch(level)
         {
             case 1: return new Vector(0, 19);
-            case 2: return new Vector(4, 99);
+            case 2: return new Vector(4, 79);
+            case 3: return new Vector(14, 149);
         }
         return new Vector(0, 0);
     }
@@ -27,7 +28,8 @@ public class VerticalAgent extends Agent
         switch(getLevel())
         {
             case 1: minUnder = 8; break;
-            case 2: minUnder = 5; break;
+            case 2: minUnder = 4; break;
+            case 3: minUnder = 2; break;
         }
         if(count(fixed(completelyUnderMe())) >= minUnder && none(fixed(collidingWithMe())))
             setFixed();
