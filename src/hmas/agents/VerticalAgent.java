@@ -37,7 +37,7 @@ public class VerticalAgent extends Agent
         if(count(fixed(completelyUnderMe())) >= minUnder && none(fixed(ofMyType(collidingWithMe()))))
             setFixed();
         else
-            move(randomMove());   
+            move(randomMove().mul(getLevel()));   
     }
 }
 
