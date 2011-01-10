@@ -16,11 +16,13 @@ public class Main
             new VerticalAgent(world, 2);
         for(int i=0; i<5; i++)
             new VerticalAgent(world, 3);
+        PatternAgent top = new PatternAgent(world);
         for(int i=0; i<8000; i++)
             world.stepAll();
         //world.displayLevel(Integer.parseInt(args[1]));
         int[] levels = {2, 3};
         world.displayLevels(levels);
+        System.out.println(top.found());
     }
 }
 

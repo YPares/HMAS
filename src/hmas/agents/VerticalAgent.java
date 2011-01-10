@@ -12,7 +12,7 @@ public class VerticalAgent extends Agent
         {
             case 1: return new Vector(0, 19);
             case 2: return new Vector(4, 79);
-            case 3: return new Vector(9, 174);
+            case 3: return new Vector(19, 199);
         }
         return new Vector(0, 0);
     }
@@ -25,20 +25,16 @@ public class VerticalAgent extends Agent
     public void step()
     {
         int minUnder = 1;
-        Iterable<Agent> sonsToConsider = null;
         switch(getLevel())
         {
             case 1: minUnder = 8;
-                    sonsToConsider = completelyUnderMe();
                     break;
             case 2: minUnder = 4;
-                    sonsToConsider = completelyUnderMe();
                     break;
             case 3: minUnder = 2;
-                    sonsToConsider = partiallyUnderMe();
                     break;
         }
-        if(count(fixed(sonsToConsider)) >= minUnder && none(fixed(collidingWithMe())))
+        if(count(fixed(completelyUnderMe())) >= minUnder && none(fixed(ofMyType(collidingWithMe()))))
             setFixed();
         else
             move(randomMove());   
