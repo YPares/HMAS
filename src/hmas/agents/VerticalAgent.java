@@ -4,19 +4,19 @@ import hmas.*;
 import java.util.Random;
 
 
-public class HorizontalAgent extends Agent
+public class VerticalAgent extends Agent
 {
     public static Vector makeDiagonal(int level)
     {
         switch(level)
         {
-            case 1: return new Vector(9, 0);
-            case 2: return new Vector(49, 4);
+            case 1: return new Vector(0, 19);
+            case 2: return new Vector(4, 99);
         }
         return new Vector(0, 0);
     }
 
-    public HorizontalAgent(World world, int level)
+    public VerticalAgent(World world, int level)
     {
         super(world, level, world.randomPosition(), makeDiagonal(level));
     }
@@ -32,7 +32,7 @@ public class HorizontalAgent extends Agent
         if(count(fixed(completelyUnderMe())) >= minUnder)
             setFixed();
         else
-            move(randomMove());
+            move(randomMove());   
     }
 }
 

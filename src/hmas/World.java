@@ -23,12 +23,19 @@ public class World
         agents = new TreeMap< Integer, HashSet<Agent> >();
     }
 
-    public void step()
+    public void stepAll()
     {
         for(HashSet<Agent> set : agents.values())
             for(Agent ag : set)
                 if(!ag.isFixed())
                     ag.step();
+    }
+
+    public void stepLevel(int level)
+    {
+        for(Agent ag : getLevel(level))
+            if(!ag.isFixed())
+                ag.step();
     }
 
     public Vector imageDiagonal()

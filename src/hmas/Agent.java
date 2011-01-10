@@ -95,7 +95,7 @@ public abstract class Agent
         return world.image[v.x()][v.y()];
     }
 
-    Iterable<Agent> mySons()
+    protected Iterable<Agent> mySons()
     {
         if(level <= 0)
             return Collections.emptySet();
