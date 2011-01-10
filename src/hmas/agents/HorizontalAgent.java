@@ -12,7 +12,7 @@ public class HorizontalAgent extends Agent
         {
             case 1: return new Vector(9, 0);
             case 2: return new Vector(49, 4);
-            case 3: return new Vector(99, 4);
+            case 3: return new Vector(99, 50);
         }
         return new Vector(0, 0);
     }
@@ -27,14 +27,17 @@ public class HorizontalAgent extends Agent
         int minUnder = 1;
         switch(getLevel())
         {
-            case 1: minUnder = 8; break;
-            case 2: minUnder = 4; break;
-            case 3: minUnder = 2; break;
+            case 1: minUnder = 8;
+                    break;
+            case 2: minUnder = 4;
+                    break;
+            case 3: minUnder = 1;
+                    break;
         }
-        if(count(fixed(completelyUnderMe())) >= minUnder && none(fixed(collidingWithMe())))
+        if(count(fixed(completelyUnderMe())) >= minUnder && none(fixed(ofMyType(collidingWithMe()))))
             setFixed();
         else
-            move(randomMove());
+            move(randomMove().mul(getLevel()));   
     }
 }
 

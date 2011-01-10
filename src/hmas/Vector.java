@@ -37,5 +37,10 @@ public class Vector
     {
         return _x*v._x + _y*v._y;
     }
+
+    public Vector mul(int fact)
+    {
+        return new Vector(_x*fact, _y*fact);
+    }
 }
 

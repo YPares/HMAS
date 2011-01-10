@@ -27,7 +27,7 @@ public abstract class Agent
     private Vector diagonal;  // Then, a 1 pixel agent should have a diagonal of (0, 0): it is merely a point, with no size
                               // The coordinates of diagonal MUST be both POSITIVE
     private Filter<Agent> differentFilter, collidesPartiallyFilter,
-                          collidesCompletelyFilter, fixedFilter;
+                          collidesCompletelyFilter, fixedFilter, sameAgentTypeFilter;
 
     private boolean isFixed;
 
@@ -66,9 +66,13 @@ public abstract class Agent
             }
         };
         fixedFilter = new Filter<Agent>() {
-            public boolean passes(Agent ag)
-            {
+            public boolean passes(Agent ag) {
                 return ag.isFixed();
+            }
+        };
+        sameAgentTypeFilter = new Filter<Agent>() {
+            public boolean passes(Agent ag) {
+                return self.getClass() == ag.getClass();
             }
         };
 
@@ -120,6 +124,11 @@ public abstract class Agent
     protected Iterable<Agent> fixed(Iterable<Agent> it)
     {
         return fixedFilter.filter(it);
+    }
+
+    protected Iterable<Agent> ofMyType(Iterable<Agent> it)
+    {
+        return sameAgentTypeFilter.filter(it);
     }
 
     protected static int count(Iterable<?> it)
