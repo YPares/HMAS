@@ -6,6 +6,7 @@ import java.util.Random;
 
 public abstract class Agent
 {
+    // Filters agents: keeps those which collide with the 'this'.
     private abstract class CollisionFilter extends Filter<Agent>
     {
         private Agent self;
@@ -46,11 +47,13 @@ public abstract class Agent
         this.position = position;
         this.diagonal = diagonal;
         final Agent self = this;
+        // To keep agents that are different of 'this'
         differentFilter = new Filter<Agent>() {
             public boolean passes(Agent ag){
                 return !self.equals(ag);
             }
         };
+        // To keep agents that partially collide with 'this'
         collidesPartiallyFilter = new CollisionFilter(this) {
             public boolean passes(Agent ag) {
                 return pointInMe(ag.position) || pointInMe(ag.position.add(ag.diagonal)) ||
@@ -58,6 +61,7 @@ public abstract class Agent
                        pointInMe(ag.position.add(new Vector(0, ag.diagonal.y())));
             }
         };
+        // To keep agents that completely collide with 'this' (Four corners are in 'this')
         collidesCompletelyFilter = new CollisionFilter(this) {
             public boolean passes(Agent ag) {
                 return pointInMe(ag.position) && pointInMe(ag.position.add(ag.diagonal)) &&
@@ -65,11 +69,13 @@ public abstract class Agent
                        pointInMe(ag.position.add(new Vector(0, ag.diagonal.y())));
             }
         };
+        // To keep agents that are fixed
         fixedFilter = new Filter<Agent>() {
             public boolean passes(Agent ag) {
                 return ag.isFixed();
             }
         };
+        // To keep agents that have the same class than 'this'
         sameAgentTypeFilter = new Filter<Agent>() {
             public boolean passes(Agent ag) {
                 return self.getClass() == ag.getClass();
@@ -99,6 +105,7 @@ public abstract class Agent
         return world.image[v.x()][v.y()];
     }
 
+    // Get the agents of the level under 'this' (level N-1)
     protected Iterable<Agent> mySons()
     {
         if(level <= 0)
@@ -106,31 +113,37 @@ public abstract class Agent
         return world.agents.get(level - 1);
     }
 
+    // Get the agents of same level than 'this' (level N)
     protected Iterable<Agent> myBrothers()
     {
         return differentFilter.filter(world.agents.get(level));
     }
 
+    // Get the agents of N-1 physically under 'this' (not necessarily completely, maybe just a corner)
     protected Iterable<Agent> partiallyUnderMe()
     {
         return collidesPartiallyFilter.filter(mySons());
     }
 
+    // Get the agents of N-1 physically under 'this'
     protected Iterable<Agent> completelyUnderMe()
     {
         return collidesCompletelyFilter.filter(mySons());
     }
 
+    // Filters agents that are not fixed
     protected Iterable<Agent> fixed(Iterable<Agent> it)
     {
         return fixedFilter.filter(it);
     }
 
+    // Filters agents that are not of the type of 'this'
     protected Iterable<Agent> ofMyType(Iterable<Agent> it)
     {
         return sameAgentTypeFilter.filter(it);
     }
 
+    // Count the elements contained in an iterable
     protected static int count(Iterable<?> it)
     {
         int count = 0;
@@ -139,16 +152,19 @@ public abstract class Agent
         return count;
     }
 
+    // Tells whether an iterable is empty
     protected static boolean none(Iterable<?> it)
     {
         return !it.iterator().hasNext();
     }
 
+    // Get the agents of N that overlap with 'this'
     protected Iterable<Agent> collidingWithMe()
     {
         return collidesPartiallyFilter.filter(myBrothers());
     }
 
+    // Move the agent
     protected void move(Vector v)
     {
         Vector newPosition = position.add(v);
