@@ -44,13 +44,42 @@ Nous nous proposons de reconnaître des formes de type chiffre. Plus préciséme
 \end{itemize}
 
 
-\chapter{Conception détaillée}
-\section{La hiérarchie du SMA}
+\chapter{Conception}
+\section{SMA hiérarchique : définition}
+Un SMA hiérarchique est un SMA dans lequel les agents sont réparties en différents niveaux. Les agents de niveau 0, les plus bas dans la hiérarchie, ne supervisent personne. Tous les agents appartenant à un niveau supérieur à 0 supervisent plusieurs agents du niveau immédiatement en-dessous d'eux.
+
+Un agent appartenant à un niveau de hiérarchie supérieur à 0 ne supervise pas obligatoirement la totalité des agents du niveau en-dessous de lui.
+
+\section{La hiérarchie de notre SMA}
+La hiérarchie de notre SMA est la suivante :
+\begin{itemize}
+ \item Niveau 0 : agents de type \emph{PixelAgent}
+ \item Niveaux 1 à n-1 : agents de type \emph{HorizontalAgent} et \emph{VerticalAgent}
+ \item Niveau n : un agent de type \emph{PatternAgent}
+\end{itemize}
+
+~
+
+Les agents de type \emph{PixelAgent} sont des agents qui se fixent lorsqu'ils tombent sur un pixel noir. Ils ont une taille de 1.
+
+Les agents de type \emph{HorizontalAgent} et \emph{VerticalAgent} sont des agents qui vont se fixer en fontion du nombre d'agents de niveau inférieur fixés situés \textbf{complètement} en-dessous d'eux. Par exemple, un HorizontalAgent de niveau 2 ne se fixera que s'il se trouve physiquement au-dessus de plus de 3 \emph{HorizontalAgent} fixés.
+
+Enfin, les agents de type PatternAgent sont des agents qui prendront une décision quant à la forme à reconnaître. Pour cela ils se baseront sur le nombre et le type (horizontal ou vertical) des agents du niveau en-dessous qui sont physiquement situés en-dessous de lui. Il a une taille égale à l'image contenant la forme à reconnaître. Par exemple, un \emph{PatternAgent} reconnaîtra un 3 s'il trouve 3 \emph{HorizontalAgent} ainsi que 1 \emph{VerticalAgent}.
+
+\section{Positionnement et déplacement des agents}
+Les agents peuvent se déplacer par-dessus d'autres agents de même niveau hiérarchique, mais des agents de même niveau ne peuvent se fixer partiellement ou totalement l'un sur l'autre.
+
+Actuellement, le déplacement de nos agents s'effectue de manière aléatoire.
+
+\section{Architecture}
+Un objet de classe \emph{World} contient les agents ainsi que la représentation du monde qui est basée sur l'image contenant la forme à reconnaître.
+
+L'évolution du monde est basée sur le concept de tour : chaque tour, chacun de agents, s'il n'est pas fixé, tente de se déplacer et de se fixer.
 
 \section{Diagramme de classes}
 La figure \ref{fig:dc} présente le diagramme de classes du projet.
 \begin{figure}
- %\includegraphics{}
+ \includegraphics[scale=.29, angle=90]{images/classes.pdf}
  \caption{Diagramme de classes}
  \label{fig:dc}
 \end{figure}
@@ -65,12 +94,29 @@ Python a été éliminé car l'un des deux membres de l'équipe ne disposait que
 Dans notre bibliographie, nous avions évoqué une API Java, \emph{MAGIQUE} (\textbf{M}ulti-\textbf{Agent} hiérarch\textbf{ique}), permettant de développer des SMA hiérarchique en Java. Cependant, après avoir étudié l'API, il s'est avéré que celle-ci était surdimensionnée pour nos besoins. En effet, nous ne nécessitions ni liaisons dynamiques entre agents, ni apprentissage dynamique des compétences, ce qui est le cœur de cette API. 
 
 \section{Perspectives}
-Mieux gérer le chevauchement des agents longs
-Orienter direction agents
+Avec plus de temps, il serait possible d'apporter des améliorations au systèmes. Tout d'abord, il serait possible de mieux placer les agents à leur création. Actuellement ils sont placés aléatoirement, mais il est certains qu'en les disposant de manière \og{}équitable\fg{} sur toute la surface de l'image, ils trouveraient plus vite un endroit où se fixer.
 
+Ensuite, il serait possible de donner une direction de déplacement aux agents pour leur faire couvrir un maximum de surface.
+
+Actuellement, nous ne disposons que d'agents de type \og{}barre\fg{}, mais avec des agents capables de reconnaître d'autres formes, il serait possible d'être plus flexibles sur la calligraphie des formes à reconnaître.
+
+Ces perspectivent sont facilement implémentables grâce à l'architecture de notre programme. En effet, la classe abstraite \emph{Agent} contient de nombreuse méthodes rendant aisé le développement de classes dérivées.
+
+%Mieux gérer le chevauchement des agents longs
+
+%Orienter direction agents
+
+%Agents formes différentes
+
+%tweak, tailles intermédiaires
 
 \chapter{Conclusion}
 %\addcontentsline{toc}{chapter}{Conclusion}
+\section{Résultats}
+Actuellement, du fait de nos critères basés sur la composition des chiffres par des barres horizontales et verticales, nous pouvons distinguer les chiffres suivants : 0, 1, 3, 4, 7, et la classe \{2, 5, 6, 8, 9\}. Par contre, du fait du déplacement aléatoire de nos agents, pour un taux de succès supérieur à 75\%, cela prend plus de 30 mn par forme à reconnaître.
+
+
+\section{Conclusion générale}
 Ce projet nous a permis de nous approprier les notions de bases liées à un système multi-agents hiérarchique, et donc d'aller un peu au-delà du cours. De plus, son application à un problématique d'actualité, la reconnaissance de forme, nous  a permis de mesurer les possibilités concrètes offertes par les SMA.
 
 \end{document}
