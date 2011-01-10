@@ -7,6 +7,8 @@ import java.util.Random;
 public class PatternAgent extends Agent
 {
     private Integer found = null;
+    private int numVFinal;
+    private int numHFinal;
 
     public PatternAgent(World world)
     {
@@ -46,10 +48,14 @@ public class PatternAgent extends Agent
             found = 7;
             setFixed();
         }
+        numHFinal = numH;
+        numVFinal = numV;
     }
 
     public Integer found()
     {
+        System.out.println(numHFinal);
+        System.out.println(numVFinal);
         return this.found;
     }
 }

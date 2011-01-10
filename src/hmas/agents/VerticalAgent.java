@@ -11,8 +11,8 @@ public class VerticalAgent extends Agent
         switch(level)
         {
             case 1: return new Vector(0, 19);
-            case 2: return new Vector(4, 79);
-            case 3: return new Vector(19, 199);
+            case 2: return new Vector(6, 99);
+            case 3: return new Vector(33, 199);
         }
         return new Vector(0, 0);
     }
@@ -22,6 +22,11 @@ public class VerticalAgent extends Agent
         super(world, level, world.randomPosition(), makeDiagonal(level));
     }
 
+    public VerticalAgent(World world, int level, Vector position)
+    {
+        super(world, level, position, makeDiagonal(level));
+    }
+
     public void step()
     {
         int minUnder = 1;
@@ -29,7 +34,7 @@ public class VerticalAgent extends Agent
         {
             case 1: minUnder = 8;
                     break;
-            case 2: minUnder = 4;
+            case 2: minUnder = 3;
                     break;
             case 3: minUnder = 2;
                     break;
