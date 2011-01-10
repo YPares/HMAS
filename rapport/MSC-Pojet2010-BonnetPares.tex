@@ -60,11 +60,13 @@ La hiérarchie de notre SMA est la suivante :
 
 ~
 
-Les agents de type \emph{PixelAgent} sont des agents qui se fixent lorsqu'ils tombent sur un pixel noir. Ils ont une taille de 1.
+Les agents de type \emph{PixelAgent} sont des agents qui se fixent lorsqu'ils tom\-bent sur un pixel noir. Ils ont une taille de 1.
 
-Les agents de type \emph{HorizontalAgent} et \emph{VerticalAgent} sont des agents qui vont se fixer en fontion du nombre d'agents de niveau inférieur fixés situés \textbf{complètement} en-dessous d'eux. Par exemple, un HorizontalAgent de niveau 2 ne se fixera que s'il se trouve physiquement au-dessus de plus de 3 \emph{HorizontalAgent} fixés.
+Les agents de type \emph{HorizontalAgent} et \emph{VerticalAgent} sont des agents qui vont se fixer en fontion du nombre d'agents de niveau inférieur fixés situés \textbf{complètement} en-dessous d'eux. Par exemple, un \emph{HorizontalAgent} de niveau 2 ne se fixera que s'il se trouve physiquement au-dessus de plus de 3 \emph{HorizontalAgent} fixés.
 
-Enfin, les agents de type PatternAgent sont des agents qui prendront une décision quant à la forme à reconnaître. Pour cela ils se baseront sur le nombre et le type (horizontal ou vertical) des agents du niveau en-dessous qui sont physiquement situés en-dessous de lui. Il a une taille égale à l'image contenant la forme à reconnaître. Par exemple, un \emph{PatternAgent} reconnaîtra un 3 s'il trouve 3 \emph{HorizontalAgent} ainsi que 1 \emph{VerticalAgent}.
+Enfin, les agents de type \emph{PatternAgent} sont des agents qui prendront une décision quant à la forme à reconnaître. Pour cela ils se baseront sur le nombre et le type (horizontal ou vertical) des agents du niveau en-dessous qui sont physiquement situés en-dessous de lui. Par exemple, un \emph{PatternAgent} reconnaîtra un 3 s'il trouve 3 \emph{HorizontalAgent} ainsi que 1 \emph{VerticalAgent}. 
+
+Un \emph{PatternAgent} a une taille égale à celle de l'image contenant la forme à reconnaître. 
 
 \section{Positionnement et déplacement des agents}
 Les agents peuvent se déplacer par-dessus d'autres agents de même niveau hiérarchique, mais des agents de même niveau ne peuvent se fixer partiellement ou totalement l'un sur l'autre.
@@ -98,9 +100,9 @@ Avec plus de temps, il serait possible d'apporter des améliorations au système
 
 Ensuite, il serait possible de donner une direction de déplacement aux agents pour leur faire couvrir un maximum de surface.
 
-Actuellement, nous ne disposons que d'agents de type \og{}barre\fg{}, mais avec des agents capables de reconnaître d'autres formes, il serait possible d'être plus flexibles sur la calligraphie des formes à reconnaître.
+De plus, actuellement, nous ne disposons que d'agents de type \og{}barre\fg{}, mais avec des agents capables de reconnaître d'autres formes, il serait possible d'être plus flexibles sur la calligraphie des formes à reconnaître.
 
-Ces perspectivent sont facilement implémentables grâce à l'architecture de notre programme. En effet, la classe abstraite \emph{Agent} contient de nombreuse méthodes rendant aisé le développement de classes dérivées.
+Ces perspectivent sont facilement implémentables grâce à l'architecture de notre programme. En effet, la classe abstraite \emph{Agent} contient de nombreuses méthodes rendant aisé le développement de classes dérivées.
 
 %Mieux gérer le chevauchement des agents longs
 
@@ -122,7 +124,7 @@ Actuellement, du fait de nos critères basés sur la composition des chiffres pa
 
 ~
 
-Les résultats ne sont pas très bons, mais avec plus de temps pour paramétrer plus finement le nombre d'automates et de tours, nous sommes confiants quant à l'obtention de meilleurs résultats.
+Ces statistiques ont été obtenues de la manière suivante : 10 tentatives par imagette contenant un chiffre de 0 à 9. Pour disposer de statistiques vraiment significatives, il aurait été intéressant d'effectuer plus de tentatives par classe. Cependant, genérer les résultats présentés ci-dessus demande déjà plus de 3h. Les tests nous ont principalement servi à paramétrer nos agents (taille, nombre) et le nombre de tours à jouer dans le monde.
 
 
 \section{Conclusion générale}
