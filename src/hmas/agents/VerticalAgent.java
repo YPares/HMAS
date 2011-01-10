@@ -12,7 +12,7 @@ public class VerticalAgent extends Agent
         {
             case 1: return new Vector(0, 19);
             case 2: return new Vector(4, 79);
-            case 3: return new Vector(14, 149);
+            case 3: return new Vector(9, 149);
         }
         return new Vector(0, 0);
     }

@@ -14,20 +14,13 @@ public class Main
             new VerticalAgent(world, 1);
         for(int i=0; i<5; i++)
             new VerticalAgent(world, 2);
-        for(int i=0; i<2000; i++)
-        {
-            world.stepLevel(0);
-        }
-        for(int i=0; i<2000; i++)
-        {
-            world.stepLevel(0);
-            world.stepLevel(1);
-        }
-        for(int i=0; i<2000; i++)
+        for(int i=0; i<5; i++)
+            new VerticalAgent(world, 3);
+        for(int i=0; i<8000; i++)
             world.stepAll();
         //world.displayLevel(Integer.parseInt(args[1]));
-        //int[] levels = {0,1,2};
-        //world.displayLevels(levels);
+        int[] levels = {2, 3};
+        world.displayLevels(levels);
     }
 }
 
